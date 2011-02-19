@@ -8,7 +8,6 @@ This plugin works with the Google Language API and can be used to translate a te
 How to use
 ----------
 
-
 First you must to include the JS files in the head of your HTML document.
 
         #HTML
@@ -19,9 +18,9 @@ In your JS.
 
         #JS
         window.addEvent('domready', function(){
-          //original language text
+          //source language text
           var from = "en", 
-          //destination language    
+          //target language    
               to = "fr", 
           //grab the original text
               text = document.id('input').get('value'),
