@@ -1,3 +1,20 @@
+/*
+---
+description: This plugin works with the Google Language API and can be used to translate a text in all the languages provided by the API.
+
+authors:
+- Adrian Statescu (http://thinkphp.ro)
+
+license:
+- MIT-style license
+
+requires:
+ core/1.3: '*'
+
+provides: [GoogleLanguage]
+...
+*/
+
    var GoogleLanguage = new Class({
        Implements: [Options, Events],
        options: {
