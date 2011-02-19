@@ -80,5 +80,5 @@ In your HTML
 
 You can view in action:
 
-- []()
-- []()
+- [http://thinkphp.ro/apps/js-hacks/google-translate/demos/demo1.html](http://thinkphp.ro/apps/js-hacks/google-translate/demos/demo1.html)
+- [http://thinkphp.ro/apps/js-hacks/google-translate/demos/demo2.html](http://thinkphp.ro/apps/js-hacks/google-translate/demos/demo2.html)
