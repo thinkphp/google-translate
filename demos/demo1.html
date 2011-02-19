@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Google Translate</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+  <link rel="stylesheet" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+  <style>
+  html,body {background: #284D77;font-family: georgia,arial,sans-serif,verdana;}
+  #doc{background: #fff;margin-top: 20px;padding: 10px;width: 95%;border-radius: 10px;-webkit-border-radius: 10px;-moz-border-radius: 10px} 
+  #bd {padding-top: 40px}
+  .yui-gb .first{width: 450px;}
+  .yui-gb .second{width: 350px;}
+  p{margin: 10px}
+  h2{margin-left: 10px;font-family: sans-serif;font-style:normal;font-size: 30px;background: #A3C2E5;padding: 10px;width: 87%;margin-bottom:50px;margin-top: 30px;border-radius: 10px;-webkit-border-radius: 10px;-moz-border-radius: 10px}
+  #translate {float: right;margin-right: 27px;padding: 3px;color: #444}
+  #ft {font-size: 14px;font-family: tahoma;margin-top: 40px}
+  #ft a{color: #284D77}
+  </style>
+  <script src="http://www.google.com/jsapi?key=ABQIAAAA1XbMiDxx_BTCY2_FkPh06RRaGTYH6UMl8mADNa0YKuWNNa8VNxQEerTAUcfkyrr6OwBovxn7TDAH5Q"></script>
+  <script type="text/javascript">google.load("mootools", "1.3");</script>
+  <script type="text/javascript" src="GoogleLanguage-yui-compressed.js"></script>
+  <script type="text/javascript">
+  //when the DOM is READY then begin
+  window.addEvent('domready', function(){
+      var language = {'ro':'romanian','en':'english','de':'german','es':'spanish','fr':'french','it':'italian','pt':'portuguese'},
+          text, from, to;
+      var button = document.id('translate'); 
+      button.addEvent('click', function(){
+          text = document.id('text').get('value');
+          from = document.id('source').get('value');        
+          to = document.id('destination').get('value');
+          var t = new GoogleLanguage({text: text,from: from, to: to, 
+                      onRequest: function() {
+                        document.id('translation').set('html','<strong>Translating...</strong>');
+                      },
+                      onSuccess: function(resp) {
+                        document.id('translation').set('html','Translation: <b>' + language[from] + '</b>=><b>'+ language[to] + '</b>');
+                        document.id('results').set('text', resp);
+                      }
+          });
+          t.translate();   
+      });
+   });
+  </script>
+</head>
+<body>
+<div id="doc">
+         <div id="hd"><h2>Google Translate</h2></div>
+                   <div id="bd">
+                         <div class="yui-gb">
+                               <div class="yui-u first">
+                                   <p><label for="text">Enter text</label></p>
+                                   <p><textarea cols="60" rows="10" id="text" name="text"></textarea></p>
+                                   <p>
+                                       <select name="source" id="source">
+                                               <option value="ro">romanian</option>
+                                               <option value="en" selected>english</option>
+                                               <option value="de">german</option>
+                                               <option value="es">spanish</option>
+                                               <option value="fr">french</option>
+                                               <option value="it">italian</option>
+                                               <option value="pt">portuguese</option>
+                                       </select>
+
+                                       >
+
+                                       <select name="destination" id="destination">
+                                               <option value="en">english</option>
+                                               <option value="ro" selected>romanian</option>
+                                               <option value="es">spanish</option>
+                                               <option value="pt">portuguese</option>
+                                               <option value="de">german</option>
+                                               <option value="it">italian</option>
+                                               <option value="fr">french</option>
+                                       </select>
+ 
+                                   </p>
+
+                                   <input type="button" value="Translate" name="translate" id="translate" />  
+
+                              </div>
+
+                              <div class="yui-u second">
+
+                                   <p id="translation">Translation</p>
+
+                                   <p id="results"></p>
+                              </div>
+
+                        </div>
+
+
+                  </div>
+         <div id="ft">&copy; 2011 Written By @<a href="http://twitter.com/thinkphp">thinkphp</a> | download on <a href="#">GitHub</a></div>
+
+</div>
+
+</body>
+</html>

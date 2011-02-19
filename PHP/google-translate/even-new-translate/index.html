@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Google Translate</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+  <link rel="stylesheet" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+  <style>
+  html,body {background: #284D77;font-family: georgia,arial,sans-serif,verdana;}
+  #doc{background: #fff;margin-top: 20px;padding: 10px;width: 95%;border-radius: 10px;-webkit-border-radius: 10px;-moz-border-radius: 10px} 
+  #bd {padding-top: 40px}
+  .yui-gb .first{width: 450px;}
+  .yui-gb .second{width: 350px;}
+  p{margin: 10px}
+  h2{margin-left: 10px;font-family: sans-serif;font-style:normal;font-size: 30px;background: #A3C2E5;padding: 10px;width: 87%;margin-bottom:50px;margin-top: 30px;border-radius: 10px;-webkit-border-radius: 10px;-moz-border-radius: 10px}
+  #translate {float: right;margin-right: 27px;padding: 3px;color: #444}
+  #ft {font-size: 14px;font-family: tahoma;margin-top: 40px}
+  #ft a{color: #284D77}
+  </style>
+  <script type="text/javascript">
+  DOMhelp = {
+
+          addEvent: function(elem,evType,fn,useCapture) {
+                    if(elem.addEventListener) {
+                            elem.addEventListener(evType,fn,useCapture); 
+                    } else if(elem.attachEvent) {
+                            var r = elem.attachEvent('on' + evType,fn);
+                             return r;  
+                    } else {
+                            elem['on'+evType] = fn;
+                    }
+          },
+          getXHR: function() {
+                var xml;
+                       try {
+                              xml = new XMLHttpRequest();
+                           }catch(e) {
+                                      try {
+                                            xml = new ActiveXObject("Microsoft.XMLHTTP");
+                                       } catch(e){
+                                                  try {
+                                                        xml = new ActiveXObject("Msxml2.XMLHTTP");
+                                                        } catch(e) {xml = false;}
+                                                   }
+                                       }
+                if(!xml) {alert('The browser does not support Ajax. consider upgrading the browser!');}
+                     else
+                        {return xml;}
+          }
+  };
+
+
+  var language = {'ro':'romanian','en':'english','de':'german','es':'spanish','fr':'french','it':'italian','pt':'portuguese'};
+  //handler for button translate that achieve a request to the server and retrieve the results
+  var DoTranslate = function() {
+
+      document.getElementById('translation').innerHTML = '<b>Translating...</b>';
+
+      var xml = DOMhelp.getXHR(), sentences = '';
+      var text = document.getElementById('text').value;
+      var from = document.getElementById('source').options[document.getElementById('source').selectedIndex].value; 
+      var to = document.getElementById('destination').options[document.getElementById('destination').selectedIndex].value;
+      var url = 'translate.php?from=' + from + '&to=' + to;
+      var params = 'q=' + text;
+          xml.open("POST", url, true);
+          xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          xml.setRequestHeader("Content-length", params.length);
+          xml.setRequestHeader("Connection", "close");          
+          xml.onreadystatechange = function() {
+              if(xml.readyState == 4) {
+                      if(xml.status && /200/.test(xml.status)) { 
+                             document.getElementById('results').innerHTML = xml.responseText;
+                             document.getElementById('translation').innerHTML = "Translation: <b>" + language[from] + "</b> &raquo; <b>" + language[to] + "</b>";  
+                      }
+                }
+            }
+          xml.send(params); 
+  }
+
+
+  //handler for swap click
+  var DoSwap = function(e) {
+       //keep value of selected option
+      var a = document.getElementById('source').options[document.getElementById('source').selectedIndex].text; 
+       //keep value of selected option
+      var b = document.getElementById('destination').options[document.getElementById('destination').selectedIndex].text; 
+      //hold index
+      var k;
+          //loop through vector of options and select the just index 
+          for(var i=0; i< document.getElementById('source').options.length;i++) {
+                       if(document.getElementById('source').options[i].text == b) {
+                               k = i;
+                               break;
+                       }                
+          }
+          //updated index
+          document.getElementById('source').selectedIndex = k;
+          //loop through
+          for(var i=0; i< document.getElementById('destination').options.length;i++) {
+                       if(document.getElementById('destination').options[i].text == a) {
+                               j = i;
+                               break;
+                       }                
+          }
+          //updated index
+          document.getElementById('destination').selectedIndex = j;
+  }
+
+  function init() {
+    DOMhelp.addEvent(document.getElementById('translate'),'click',DoTranslate,false);
+    DOMhelp.addEvent(document.getElementById('swap'),'click',DoSwap,false);
+  }
+  DOMhelp.addEvent(window,'load',init,false);
+  </script>
+</head>
+<body>
+<div id="doc">
+         <div id="hd"><h2>Google Translate</h2></div>
+                   <div id="bd">
+                         <div class="yui-gb">
+                               <div class="yui-u first">
+                                   <p><label for="text">Enter text</label></p>
+                                   <p><textarea cols="60" rows="10" id="text" name="text"></textarea></p>
+                                   <p>
+                                       <select name="source" id="source">
+                                               <option value="ro">romanian</option>
+                                               <option value="en" selected>english</option>
+                                               <option value="de">german</option>
+                                               <option value="es">spanish</option>
+                                               <option value="fr">french</option>
+                                               <option value="it">italian</option>
+                                               <option value="pt">portuguese</option>
+                                       </select>
+
+                                       >
+
+                                       <select name="destination" id="destination">
+                                               <option value="en">english</option>
+                                               <option value="ro" selected>romanian</option>
+                                               <option value="es">spanish</option>
+                                               <option value="pt">portuguese</option>
+                                               <option value="de">german</option>
+                                               <option value="it">italian</option>
+                                               <option value="fr">french</option>
+                                       </select>
+ 
+                                       <a href="#" id="swap">swap</a>
+
+                                   </p>
+
+                                   <input type="button" value="Translate" name="translate" id="translate" />  
+
+                              </div>
+
+                              <div class="yui-u second">
+
+                                   <p id="translation">Translation</p>
+
+                                   <p id="results"></p>
+                              </div>
+
+                        </div>
+
+
+                  </div>
+ 
+         <div id="ft">&copy; 2011 Written By @<a href="http://twitter.com/thinkphp">thinkphp</a> | download on <a href="#">GitHub</a></div>
+
+</div>
+
+</body>
+</html>
