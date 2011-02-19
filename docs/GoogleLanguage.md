@@ -80,6 +80,19 @@ void.
 - xhr (*Object*) - the object XMLHttpRequest.
 
 
+### complete
+
+(*Function*) - callback to execute when the data returns from service.
+
+### Signature:
+
+    onComplete(responseJSON, responseText);
+
+#### Arguments:
+
+- responseJSON (*Object JSON*) - the response from server in format JSON.
+- responseText (*String*) - the response from server as String.
+
 
 Object: Element.Properties (#Element-Properties)
 ================================================
@@ -116,7 +129,7 @@ Returns the previously set GoogleLanguage instance (or a new one with default op
 
 #### Syntax:
 
-	el.get('translate');
+     el.get('translate');
 
 #### Arguments:
 
