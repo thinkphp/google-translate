@@ -3,5 +3,5 @@ author: thinkphp
 current: v1.0
 category: request
 tags: [json,request,interface,gogle,translate,language,translator,REST]
-docs: 
+docs: https://github.com/thinkphp/google-translate/blob/master/docs/GoogleLanguage.md
 demo: 
