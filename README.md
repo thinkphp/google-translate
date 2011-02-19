@@ -70,11 +70,14 @@ In your JS.
 
 
 In your HTML
+
+        #html
         <textarea id="input"></textarea>
         <input type="button" id="trans" />   
         <div id="results"></div> 
         <div id="text1"></div>
         <div id="text2"></div>
+
 ### Notes:
 
 You can view in action:
