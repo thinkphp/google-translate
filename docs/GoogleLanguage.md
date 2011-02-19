@@ -17,9 +17,9 @@ GoogleLanguage Method: constructor {#GoogleLanguage: constructor}
 
 #### Options
 
-1. text (String, by default '')   - input text  
-2. from (String, by default 'en') - source language
-3.   to (String, by default 'fr') - target language
+1. text (String, by default " ")   - input text to translate.
+2. from (String, by default 'en') - source language.
+3.   to (String, by default 'fr') - target language.
 
 
 ### Returns:
@@ -120,7 +120,7 @@ Sets a default GoogleLanguage instance for an Element.
 
 #### Example:
 
-$('text').set('translate',{from: 'en', to: 'fr'});
+     $('text').set('translate',{from: 'en', to: 'fr'});
 
 
 ### Getter
